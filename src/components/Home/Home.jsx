@@ -1,13 +1,14 @@
-import { fetchTrandingMovie } from 'api';
+import { useEffect, useState } from 'react';
 import Notiflix from 'notiflix';
-import React, { useEffect, useState } from 'react';
-import { List, ListItem, Tittle, Votes } from './Home.styled';
+
+import { fetchTrandingMovie } from 'api';
 import { Loader } from 'components/Loader/Loader';
+import { MovieList } from 'components/MovieList/MovieList';
 
 export const Home = () => {
   const [loading, setLoading] = useState(false);
-  const [loadMore, setLoadMore] = useState(false);
-  const [page, setPage] = useState(1);
+  // const [loadMore, setLoadMore] = useState(false);
+  // const [page, setPage] = useState(1);
   const [movie, setMovie] = useState([]);
 
   useEffect(() => {
@@ -38,19 +39,9 @@ export const Home = () => {
 
   //   console.log(movie);
   return (
-    <List>
-      {movie &&
-        movie.map(item => (
-          <ListItem key={item.id}>
-            <img
-              src={'https://image.tmdb.org/t/p/w300' + item.poster_path}
-              alt={item.title}
-            ></img>
-            <Tittle>{item.title}</Tittle>
-            <Votes>Average votes: {item.vote_average}</Votes>
-          </ListItem>
-        ))}
+    <>
+      <MovieList findedMovie={movie} />
       <Loader isLoading={loading} />
-    </List>
+    </>
   );
 };
