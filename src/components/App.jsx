@@ -1,8 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
-import { Home } from './Home/Home';
-import { Movies } from './Movies/Movies';
-import { MovieDetails } from './Movies/MovieDetails/MovieDetails';
+import Home from 'pages/Home';
+import Movies from 'pages/Movies';
+import MovieDetails from 'pages/MovieDetails';
+import NotFound from 'pages/NotFound';
 
 export const App = () => {
   return (
@@ -14,6 +15,7 @@ export const App = () => {
           <Route path="cast" />
           <Route path="reviews" />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

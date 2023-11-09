@@ -6,9 +6,8 @@ import Notiflix from 'notiflix';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-
 //ще заам'ятати пошук фільмів при поверненні на цю сторінку
-export const Movies = () => {
+export default function Movies() {
   const [query, setQuery] = useState('');
   //   const [page, setPage] = useState(1);
   const [findedMovie, setFindedMovie] = useState([]);
@@ -68,8 +67,8 @@ export const Movies = () => {
         </Form>
       </Formik>
       <Loader isLoading={loading} />
-      <MovieList findedMovie={findedMovie}/>
+      <MovieList findedMovie={findedMovie} />
       <Outlet />
     </div>
   );
-};
+}

@@ -5,7 +5,7 @@ import { fetchTrandingMovie } from 'api';
 import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
 
-export const Home = () => {
+export default function Home() {
   const [loading, setLoading] = useState(false);
   // const [loadMore, setLoadMore] = useState(false);
   // const [page, setPage] = useState(1);
@@ -44,4 +44,4 @@ export const Home = () => {
       <Loader isLoading={loading} />
     </>
   );
-};
+}
