@@ -1,7 +1,8 @@
 import { searchMovies } from 'api';
 import { Loader } from 'components/Loader/Loader';
 import { MovieList } from 'components/MovieList/MovieList';
-import { Field, Form, Formik } from 'formik';
+import { SearchBar } from 'components/SearchBar/SearchBar';
+
 import Notiflix from 'notiflix';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
@@ -42,30 +43,13 @@ export default function Movies() {
     getSearchMovies(query);
   }, [query]);
 
+  const changeQuery = value => {
+    setQuery(value);
+  };
+
   return (
     <div>
-      Movies1
-      <Formik
-        initialValues={{
-          searchQuery: '',
-          //   page: 1,
-        }}
-        onSubmit={(values, actions) => {
-          setQuery(values.searchQuery);
-          actions.resetForm();
-        }}
-      >
-        <Form>
-          <Field
-            name="searchQuery"
-            type="text"
-            // autoComplete="off"
-            // autoFocus
-            placeholder="Search movies"
-          />
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
+      <SearchBar onChangeQuery={changeQuery} />
       <Loader isLoading={loading} />
       <MovieList findedMovie={findedMovie} />
       <Outlet />

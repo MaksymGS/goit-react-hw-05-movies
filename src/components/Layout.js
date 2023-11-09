@@ -7,6 +7,7 @@ export const Container = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   overflow: hidden;
   max-width: 1280px;
+  min-height: 100vh;
   margin: 0 auto 0;
   padding: 10px 20px;
 `;
@@ -34,6 +35,10 @@ const Link = styled(NavLink)`
   padding: 16px 8px;
   display: block;
   text-decoration: none;
+  &.active {
+    color: orange;
+    font-weight: 800;
+  }
 `;
 export const Layout = () => {
   return (

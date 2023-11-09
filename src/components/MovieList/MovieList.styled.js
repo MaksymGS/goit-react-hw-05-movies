@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom/dist';
 
 export const List = styled.ul`
   display: flex;
@@ -15,9 +16,9 @@ export const ListItem = styled.li`
   background-color: #fdfdf4;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   &:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const Tittle = styled.h3`
@@ -30,4 +31,9 @@ export const Tittle = styled.h3`
 export const Votes = styled.p`
   text-align: center;
   font-size: 12px;
+`;
+
+export const StLink = styled(Link)`
+  color: black;
+  text-decoration: none;
 `;
