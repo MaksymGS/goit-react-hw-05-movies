@@ -33,7 +33,7 @@ export const Votes = styled.p`
   font-size: 12px;
 `;
 
-export const StLink = styled(Link)`
+export const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
 `;
