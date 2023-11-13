@@ -20,7 +20,7 @@ export default function Cast() {
           Notiflix.Notify.failure(`Nothing was found for this query"`);
         }
         const mainCast = resp.cast.filter((element, index) => {
-          if (index < 8) return element;
+         return index < 8;
         });
         setCast(mainCast);
       } catch (error) {
