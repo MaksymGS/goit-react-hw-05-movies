@@ -1,12 +1,12 @@
 import { Formik } from 'formik';
 import { SearchButton, StyledForm, StyledInput } from './SearchBar.styled';
+import { FcSearch } from "react-icons/fc";
 
 export const SearchBar = ({ onChangeQuery }) => {
   return (
     <Formik
       initialValues={{
         searchQuery: '',
-        //   page: 1,
       }}
       onSubmit={(values, actions) => {
         onChangeQuery(values.searchQuery);
@@ -17,11 +17,11 @@ export const SearchBar = ({ onChangeQuery }) => {
         <StyledInput
           name="searchQuery"
           type="text"
-          // autoComplete="off"
-          // autoFocus
+          autoComplete="off"
+          autoFocus
           placeholder="Search movies"
         />
-        <SearchButton type="submit">ok</SearchButton>
+        <SearchButton type="submit"><FcSearch size={36}/></SearchButton>
       </StyledForm>
     </Formik>
   );

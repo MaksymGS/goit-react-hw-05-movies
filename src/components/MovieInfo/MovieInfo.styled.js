@@ -17,5 +17,16 @@ export const GenresList = styled.ul`
 `;
 
 export const GenresItem = styled.li`
-font-weight: 400;
-`
+  font-weight: 400;
+`;
+export const PosterWrap = styled.div`
+  height: 450px;
+  min-width: 300px;
+  max-width: 300px;
+`;
+export const Image = styled.img`
+  object-fit: cover;
+  display: block;
+  height: 100%;
+  width: 100%;
+`;

@@ -12,6 +12,7 @@ export const StyledForm = styled(Form)`
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 16px;
+  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
 `;
 
 export const SearchButton = styled.button`
@@ -36,11 +37,12 @@ export const StyledInput = styled(Field)`
   display: inline-block;
   width: 100%;
   font: inherit;
-  font-size: 20px;
+  font-size: 24px;
   border: none;
   outline: none;
   padding-left: 4px;
   padding-right: 4px;
+  
 
   &::placeholder {
     font: inherit;

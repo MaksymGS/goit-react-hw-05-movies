@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -28,13 +29,17 @@ const Navigation = styled.nav`
   display: flex;
   padding-left: 120px;
 `;
+export const NavDetails = styled.nav`
+  display: flex;
+`;
 
-const Link = styled(NavLink)`
+export const Link = styled(NavLink)`
   font-size: 18px;
   font-weight: 600;
   padding: 16px 8px;
   display: block;
   text-decoration: none;
+  color: #1b1b7f;
   &.active {
     color: orange;
     font-weight: 800;
@@ -49,9 +54,11 @@ export const Layout = () => {
           <Link to="/movies">Moovies</Link>
         </Navigation>
       </Header>
-      <Container>
-        <Outlet />
-      </Container>
+      <Suspense fallback={'LOADING PAGE...'}>
+        <Container>
+          <Outlet />
+        </Container>
+      </Suspense>
     </>
   );
 };

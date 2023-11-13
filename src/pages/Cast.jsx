@@ -1,23 +1,28 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchMovieCast } from 'api';
 import Notiflix from 'notiflix';
-
-import { fetchTrandingMovie } from 'api';
+import { MovieCast } from 'components/MovieInfo/MovieCast/MovieCast';
 import { Loader } from 'components/Loader/Loader';
-import { MovieList } from 'components/MovieList/MovieList';
 
-export default function Home() {
+export default function Cast() {
+  const { movieId } = useParams();
+
+  const [cast, setCast] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [movie, setMovie] = useState([]);
 
   useEffect(() => {
-    async function trendingMovies() {
+    async function getMovieCast(movieId) {
       try {
         setLoading(true);
-        const resp = await fetchTrandingMovie();
-        if (resp.results.length === 0) {
+        const resp = await fetchMovieCast(movieId);
+        if (!resp) {
           Notiflix.Notify.failure(`Nothing was found for this query"`);
         }
-        setMovie(resp.results);
+        const mainCast = resp.cast.filter((element, index) => {
+          if (index < 8) return element;
+        });
+        setCast(mainCast);
       } catch (error) {
         Notiflix.Report.failure(
           `${error.message}`,
@@ -31,12 +36,13 @@ export default function Home() {
         setLoading(false);
       }
     }
-    trendingMovies();
-  }, []);
+    if (!movieId) return;
+    getMovieCast(movieId);
+  }, [movieId]);
 
   return (
     <>
-      <MovieList findedMovie={movie} />
+      {cast && <MovieCast cast={cast} />}
       <Loader isLoading={loading} />
     </>
   );

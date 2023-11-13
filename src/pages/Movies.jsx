@@ -5,16 +5,14 @@ import { SearchBar } from 'components/SearchBar/SearchBar';
 
 import Notiflix from 'notiflix';
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 
-//ще заам'ятати пошук фільмів при поверненні на цю сторінку
 export default function Movies() {
-  const [query, setQuery] = useState('');
-  //   const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') ?? '';
   const [findedMovie, setFindedMovie] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(query);
-
+ 
   useEffect(() => {
     async function getSearchMovies(searchQuery) {
       try {
@@ -44,7 +42,8 @@ export default function Movies() {
   }, [query]);
 
   const changeQuery = value => {
-    setQuery(value);
+    searchParams.set('query', value)
+    setSearchParams(searchParams);
   };
 
   return (

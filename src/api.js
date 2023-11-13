@@ -25,3 +25,17 @@ export const fetchMovieDetail = async movieId => {
   const resp = await axios.get(`movie/${movieId}?${params}`);
   return resp.data;
 };
+export const fetchMovieReviews = async movieId => {
+  const params = new URLSearchParams({
+    api_key: 'eb0eb7c0094eafcd73993969787d7a4b',
+  });
+  const resp = await axios.get(`movie/${movieId}/reviews?${params}`);
+  return resp.data;
+};
+export const fetchMovieCast = async movieId => {
+  const params = new URLSearchParams({
+    api_key: 'eb0eb7c0094eafcd73993969787d7a4b',
+  });
+  const resp = await axios.get(`movie/${movieId}/credits?${params}`);
+  return resp.data;
+};

@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchMovieReviews } from 'api';
 import Notiflix from 'notiflix';
-
-import { fetchTrandingMovie } from 'api';
+import { MovieReview } from 'components/MovieInfo/MovieReview/MovieReview';
 import { Loader } from 'components/Loader/Loader';
-import { MovieList } from 'components/MovieList/MovieList';
 
-export default function Home() {
+export default function Reviews() {
+  const { movieId } = useParams();
+
+  const [review, setReview] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [movie, setMovie] = useState([]);
 
   useEffect(() => {
-    async function trendingMovies() {
+    async function getMovieReview(movieId) {
       try {
         setLoading(true);
-        const resp = await fetchTrandingMovie();
-        if (resp.results.length === 0) {
+        const resp = await fetchMovieReviews(movieId);
+        if (!resp) {
           Notiflix.Notify.failure(`Nothing was found for this query"`);
         }
-        setMovie(resp.results);
+        setReview(resp);
       } catch (error) {
         Notiflix.Report.failure(
           `${error.message}`,
@@ -31,12 +33,13 @@ export default function Home() {
         setLoading(false);
       }
     }
-    trendingMovies();
-  }, []);
+    if (!movieId) return;
+    getMovieReview(movieId);
+  }, [movieId]);
 
   return (
     <>
-      <MovieList findedMovie={movie} />
+      {review && <MovieReview review={review} />}
       <Loader isLoading={loading} />
     </>
   );

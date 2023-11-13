@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { MdOutlineBackspace } from 'react-icons/md';
 import Notiflix from 'notiflix';
 import { fetchMovieDetail } from 'api';
-import { useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 import { Loader } from 'components/Loader/Loader';
+import { BackLink } from 'components/BackLink';
 
 export default function MovieDetails() {
   const [loading, setLoading] = useState(false);
   const [movieDetail, setMovieDetail] = useState(null);
+
   const { movieId } = useParams();
-  
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? '/');
+
   useEffect(() => {
     async function getMovieDetail(movieId) {
       try {
@@ -18,7 +23,6 @@ export default function MovieDetails() {
         if (!resp) {
           Notiflix.Notify.failure(`Nothing was found for this query"`);
         }
-        console.log(resp);
         setMovieDetail(resp);
       } catch (error) {
         Notiflix.Report.failure(
@@ -34,12 +38,16 @@ export default function MovieDetails() {
       }
     }
     getMovieDetail(movieId);
-  }, []);
+  }, [movieId]);
 
   return (
     <>
-      <Loader isLoading={loading} />
+      <BackLink to={backLink}>
+        <MdOutlineBackspace size={36} />
+      </BackLink>
       {movieDetail && <MovieInfo movieDetail={movieDetail} />}
+      <Outlet />
+      <Loader isLoading={loading} />
     </>
   );
 }

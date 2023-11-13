@@ -37,3 +37,13 @@ export const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
 `;
+export const ImageWrap = styled.div`
+  height: 300px;
+  min-width: 200px;
+`;
+export const Image = styled.img`
+  object-fit: cover;
+  display: block;
+  height: 100%;
+  width: 100%;
+`;
